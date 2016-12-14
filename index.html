@@ -1,112 +1,53 @@
-<!doctype html>
 <html>
 <head>
-<title>Material Emulator Frontend</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-<style>
-md-tabs.noTabPanel md-tabs-wrapper {
-    display: none !important;
-}
-</style>
+    <title>Frontend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="css.css">
+    <script type="text/javascript">
+    	var remote = require('electron').remote;
+		var dialog = remote.require('electron').dialog;
+		const {shell} = require('electron');
+    </script>
 </head>
+<body ng-app="Frontend" ng-controller="Controller" ng-cloak>
 
-<body ng-app="Frontend" ng-cloak>
-<div id="toolbar" ng-controller="Controller as ctrl">
-<md-toolbar>
-  <h2 class="md-toolbar-tools">
-   <span>Material Emulator Frontend</span>
-  </h2>
-  <span flex></span>
-  <md-tabs md-selected="currentTab">
-        <md-tab>NES</md-tab>
-        <md-tab>SNES</md-tab>
-        <md-tab>N64</md-tab>
-        <md-tab>GCN</md-tab>
-        <md-tab>Wii</md-tab>
-    </md-tabs>
-</md-toolbar>
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Game Frontend</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="deleteAll()" aria-label="Delete All">
+          <md-icon md-svg-icon="img/delete.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 
-<md-tabs md-dynamic-height md-selected="currentTab" class="noTabPanel">
-<md-tab label="NES">
-<md-content>
-<!--NES-->
-Nintendo Entertainment System
-</md-content>
+<div class='md-padding' layout="row" layout-wrap>
 
-</md-tab>
-<md-tab label="SNES">
-<md-content>
-<!--SNES-->
-Super Nintendo Entertainment System
-</md-content>
+<a ng-repeat="x in games" ng-href="javascript:shell.openItem('{{x.path}}');">
+<md-card ng-class="hover" ng-mouseenter="hover = 'md-whiteframe-6dp'" ng-mouseleave="hover = ''">
+    <img class="card-image" ng-src="{{x.artwork}}">
+    <md-card-content>
+        <span class="title">{{x.title}}</span>
+    </md-card-content>
+</md-card>
+</a>
 
-<md-tab label="N64">
-<md-content>
-<!--N64-->
-Nintendo 64
-</md-content>
+<md-button class="md-fab md-primary" ng-click="addGameDialog($event)" aria-label="Add Game">
+    <md-icon md-svg-src="img/plus.svg"></md-icon>
+</md-button>
 
-<md-tab label="GCN">
-<md-content>
-<!--GCN-->
-Nintendo GameCube
-</md-content>
-
-<md-tab label="Wii">
-<md-content>
-<!--Wii-->
-Nintendo Wii
-</md-content>
-
-</md-tab>
-</md-tabs>
 </div>
 
 
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-<script type="text/javascript">
-var open = 0
-angular.module('Frontend', ['ngMaterial'])
-.config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-    .primaryPalette('orange')
-    .accentPalette('yellow')
-    .dark();
-})
-.config(['$mdIconProvider', function($mdIconProvider) {
-	$mdIconProvider
-		.iconSet('mdi', 'icons/mdi-icons.svg', 24)
-		.iconSet('$default', 'icons/mdi-icons.svg', 24)
-	}])
-.filter('KS', function($window) {
-    return function(str) {
-      if (!str) return;
-      var keys = str.split('-');
-      var isOSX = /Mac OS X/.test($window.navigator.userAgent);
-      var seperator = (!isOSX || keys.length > 2) ? '+' : '';
-      var abbreviations = {
-        M: isOSX ? '⌘ + ' : 'Ctrl',
-        A: isOSX ? '⌥ + ' : 'Alt',
-        S: isOSX ? '⇧ + ' : 'Shift',
-      };
-      return keys.map(function(key, index) {
-        var last = index == keys.length - 1;
-        return last ? key : abbreviations[key];
-      }).join(seperator);
-    };
-  })
-.controller('Controller', function DemoCtrl($mdDialog) {
-
-})
-
-</script>
+    <script src="javascript.js"></script>
 </body>
 </html>

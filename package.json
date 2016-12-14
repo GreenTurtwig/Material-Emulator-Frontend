@@ -1,5 +1,10 @@
 {
-  "name"    : "material-notepad",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "game-frontend",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "base64-img": "^1.0.3",
+    "nedb": "^1.8.0",
+    "thegamesdb": "^0.1.2"
+  }
 }

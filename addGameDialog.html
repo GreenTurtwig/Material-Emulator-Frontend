@@ -1,0 +1,27 @@
+<md-dialog aria-label="Add Game">
+  <form>
+    <md-dialog-content class="addGameContent">
+      <span class="addGameTitle">Add Game</span>
+      <br><br>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Title</label>
+        <md-icon md-svg-src="img/dpad.svg" class="addGameIcon"></md-icon>
+        <input ng-model="title" type="text" ng-required="true">
+      </md-input-container>
+
+      <md-icon md-svg-src="img/folder.svg"></md-icon>
+
+      <md-button class="md-primary" ng-click="path()">Choose Game</md-button>
+
+    </md-dialog-content>
+    <md-dialog-actions class="addGameActions">
+      <md-button ng-click="cancel()">
+        Cancel
+      </md-button>
+      <md-button ng-click="ok()" ng-disabled="dialogDisabled">
+        OK
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,41 @@
+.card-media {
+  background-color: #cccccc;
+}
+md-card {
+  width: 175px;
+  height: 315px;
+}
+
+.card-image {
+  width: 175px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.md-fab {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+}
+
+.addGameContent {
+  padding: 24px;
+  width: 500px;
+  max-height: 810px;
+}
+.addGameActions {
+  margin-bottom: -8px;
+  margin-right: 8px;
+}
+
+.addGameTitle {
+  font-weight: bold;
+  font-size: 20px;
+}
+md-input-container.md-input-invalid > .addGameIcon {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+}
